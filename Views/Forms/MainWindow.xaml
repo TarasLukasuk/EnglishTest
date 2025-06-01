@@ -3,10 +3,69 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EnglishTest.Views.Forms"
+        xmlns:pages="clr-namespace:EnglishTest.Views.Pages"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="English Test"
+        Height="500" Width="850"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="MinWidth" Value="180"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#00C853" Offset="0"/>
+                        <GradientStop Color="#43A047" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"  CornerRadius="12" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].Color" To="#1DE9B6" Duration="0:0:0.3"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].Color" To="#00BFA5" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Background="Transparent">
+        <Border CornerRadius="20" Background="#FAFAFA" >
+            <Grid>
+                <Border Background="#388E3C" Height="60" CornerRadius="20,20,0,0" VerticalAlignment="Top">
+                    <TextBlock Text="Welcome to English Test" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+                </Border>
+
+                <Grid Margin="30,80,30,30">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Content="Create Test" Style="{StaticResource ModernButton}" Command="{Binding Command}" CommandParameter="{x:Type pages:VerificationPage}" />
+                        <Button Content="Open Test" Style="{StaticResource ModernButton}" />
+                    </StackPanel>
+                </Grid>
+                <Frame x:Name="ShowPage"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
