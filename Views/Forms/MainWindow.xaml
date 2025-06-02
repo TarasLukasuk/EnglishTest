@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:pages="clr-namespace:EnglishTest.Views.Pages"
+        xmlns:forms="clr-namespace:EnglishTest.Views.Forms"
         mc:Ignorable="d"
         Title="English Test"
         Height="500" Width="850"
@@ -60,11 +60,10 @@
 
                 <Grid Margin="30,80,30,30">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button Content="Create Test" Style="{StaticResource ModernButton}" Command="{Binding Command}" CommandParameter="{x:Type pages:VerificationPage}" />
+                        <Button Content="Create Test" Style="{StaticResource ModernButton}" Command="{Binding Command}" CommandParameter="{x:Type forms:VerificationWindow}" Cursor="Hand" />
                         <Button Content="Open Test" Style="{StaticResource ModernButton}" />
                     </StackPanel>
                 </Grid>
-                <Frame x:Name="ShowPage"/>
             </Grid>
         </Border>
     </Grid>

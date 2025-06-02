@@ -14,14 +14,9 @@ namespace EnglishTest.ViewModels
             throw new NotImplementedException();
         }
 
-        public void InitializeСommand(object paramter)
+        public void InitializeСommand()
         {
-            if (paramter == null || paramter is not Frame frame)
-            {
-                return;
-            }
-
-            Command = new ShowPageCommand(frame);
+            Command = new ShowPageCommand();
         }
     }
 }

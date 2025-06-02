@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EnglishTest.Views.Pages
+namespace EnglishTest.Views.Forms
 {
     /// <summary>
-    /// Логика взаимодействия для VerificationPage.xaml
+    /// Логика взаимодействия для VerificationWindow.xaml
     /// </summary>
-    public partial class VerificationPage : Page
+    public partial class VerificationWindow : Window
     {
-        public VerificationPage()
+        public VerificationWindow()
         {
             InitializeComponent();
         }

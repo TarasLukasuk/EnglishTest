@@ -3,6 +3,6 @@
     internal interface IInitialization
     {
         Task InitializeServicesAsync();
-        void InitializeСommand(object paramter);
+        void InitializeСommand();
     }
 }

@@ -16,7 +16,7 @@ namespace EnglishTest.Views.Forms
         {
             _viewModel = new MainViewModel();
             DataContext = _viewModel;
-            _viewModel.InitializeСommand(ShowPage);   
+            _viewModel.InitializeСommand();
         }
     }
 }

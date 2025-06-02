@@ -1,47 +1,37 @@
 ﻿using EnglishTest.Services;
-using System.Windows.Controls;
+using System.Windows;
 using System.Windows.Input;
 
 namespace EnglishTest.Commands
 {
     internal sealed class ShowPageCommand : ICommand
     {
-        private readonly Frame _frame;
-        private readonly CachePage _cachePage = new();
+        private readonly CacheWindow _cacheWindow = new();
 
         public event EventHandler? CanExecuteChanged;
 
-        public ShowPageCommand(Frame frame)
-        {
-            if (frame == null)
-            { 
-                throw new ArgumentNullException(nameof(frame)); 
-            }
-
-            _frame = frame;
-        }
-
         public bool CanExecute(object? parameter)
         {
-            return parameter is Type pageType && typeof(Page).IsAssignableFrom(pageType);
+            return parameter is Type windowType && typeof(Window).IsAssignableFrom(windowType);
         }
 
         public void Execute(object? parameter)
         {
-            if (parameter is not Type pageType)
+            if (parameter is not Type windowType)
                 return;
 
-            string pageName = pageType.Name;
+            string windowName = windowType.Name;
+
+            Window? windowInstance = Activator.CreateInstance(windowType) as Window;
 
             try
             {
-                _frame.Navigate(_cachePage.GetCache(pageName));
+                _cacheWindow.GetCache(windowName).Show();
             }
             catch (Exception)
             {
-                Page? pageInstance = Activator.CreateInstance(pageType) as Page;
-                _cachePage.CreateCache(pageName, pageInstance);
-                _frame.Navigate(pageInstance);
+                _cacheWindow.CreateCache(windowName, windowInstance);
+                _cacheWindow.GetCache(windowName).Show();
             }
         }
 
