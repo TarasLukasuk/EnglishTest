@@ -5,7 +5,7 @@ namespace EnglishTest.Views.Forms
 {
     public partial class MainWindow : Window
     {
-        private MainViewModel _viewModel;
+        private MainViewModel _viewModel = new();
 
         public MainWindow()
         {
@@ -14,7 +14,6 @@ namespace EnglishTest.Views.Forms
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _viewModel = new MainViewModel();
             DataContext = _viewModel;
             _viewModel.InitializeСommand();
         }

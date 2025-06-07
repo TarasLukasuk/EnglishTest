@@ -1,19 +1,12 @@
-﻿<Window x:Class="EnglishTest.Views.Forms.VerificationWindow"
+﻿<Window x:Class="EnglishTest.Views.Forms.TeacherRegistrationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:forms="clr-namespace:EnglishTest.Views.Forms"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Verification"
-        Width="480" Height="460"
-        ResizeMode="NoResize"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        Background="Transparent"
-        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Teacher Registration" Background="Transparent" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-
         <Style x:Key="ModernButton" TargetType="Button">
             <Setter Property="Height" Value="45"/>
             <Setter Property="MinWidth" Value="180"/>
@@ -74,19 +67,19 @@
                     <ControlTemplate TargetType="TextBox">
                         <Grid>
                             <Border x:Name="Border"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="6"/>
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6"/>
                             <ScrollViewer x:Name="PART_ContentHost" Margin="8,0,0,0" VerticalAlignment="Center"/>
                             <TextBlock x:Name="PlaceholderText"
-                                       Text="{TemplateBinding Tag}"
-                                       Foreground="Gray"
-                                       FontSize="16"
-                                       Margin="10,0,0,0"
-                                       VerticalAlignment="Center"
-                                       IsHitTestVisible="False"
-                                       Visibility="Collapsed"/>
+                               Text="{TemplateBinding Tag}"
+                               Foreground="Gray"
+                               FontSize="16"
+                               Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"
+                               Visibility="Collapsed"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="Text" Value="">
@@ -112,9 +105,9 @@
                     <ControlTemplate TargetType="PasswordBox">
                         <Grid>
                             <Border Background="{TemplateBinding Background}" 
-                                    BorderBrush="{TemplateBinding BorderBrush}" 
-                                    BorderThickness="{TemplateBinding BorderThickness}" 
-                                    CornerRadius="6"/>
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="6"/>
                             <ScrollViewer x:Name="PART_ContentHost" Margin="8,0,0,0" VerticalAlignment="Center"/>
                         </Grid>
                     </ControlTemplate>
@@ -135,10 +128,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <TextBlock x:Name="text"
-                                   Text="{TemplateBinding Content}"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   FontSize="{TemplateBinding FontSize}"
-                                   FontWeight="{TemplateBinding FontWeight}"/>
+                           Text="{TemplateBinding Content}"
+                           Foreground="{TemplateBinding Foreground}"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontWeight="{TemplateBinding FontWeight}"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="text" Property="TextDecorations" Value="Underline"/>
@@ -150,33 +143,52 @@
             </Setter>
         </Style>
 
+        <Style x:Key="PasswordStrengthProgressBar" TargetType="ProgressBar">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Margin" Value="0,10"/>
+            <Setter Property="Background" Value="#2D2D40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" SnapsToDevicePixels="true">
+                            <Grid ClipToBounds="True">
+                                <Rectangle x:Name="PART_Track" Fill="#2D2D40" RadiusX="10" RadiusY="10"/>
+                                <Rectangle x:Name="PART_Indicator" RadiusX="10" RadiusY="10" HorizontalAlignment="Left" Width="0"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
 
-    <Grid Background="Transparent">
-        <Border Width="420" Padding="30" Background="#1E1E2F" BorderBrush="#444654" BorderThickness="2" CornerRadius="20"
-                HorizontalAlignment="Center" VerticalAlignment="Center" >
+    <Grid>
+        <Border Width="420" Padding="30" Background="#1E1E2F" BorderBrush="#444654" BorderThickness="1" CornerRadius="16" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel>
-                <TextBlock Text="Verification" FontSize="26" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                <TextBlock Text="Teacher Registration" FontSize="26" FontWeight="Bold" Foreground="#2E7D32" HorizontalAlignment="Center" Margin="0,0,0,25"/>
+                <TextBox Style="{StaticResource WatermarkedTextBox}" Tag="Username..." />
+                <TextBox x:Name="EnterPassword" Style="{StaticResource WatermarkedTextBox}" TextChanged="PasswordBox_TextChanged"  Tag="Enter password..."/>
+                <TextBox x:Name="ReEnterPassword" Style="{StaticResource WatermarkedTextBox}" TextChanged="PasswordBox_TextChanged" Tag="Re-enter password..."/>
+                <ProgressBar x:Name="PasswordStrengthBar" Style="{StaticResource PasswordStrengthProgressBar}">
+                    <ProgressBar.Foreground>
+                        <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
+                            <GradientStop Color="#FF06B025"/>
+                            <GradientStop Color="#FFCCCCCC" Offset="1"/>
+                        </LinearGradientBrush>
+                    </ProgressBar.Foreground>
+                </ProgressBar>
 
-                <TextBox x:Name="UsernameBox" Tag="Username..." Style="{StaticResource WatermarkedTextBox}" />
-
-                <Grid>
-                    <PasswordBox x:Name="Password" Style="{StaticResource WatermarkedPasswordBox}" PasswordChanged="Password_PasswordChanged"/>
-                    <TextBlock x:Name="PasswordWatermark" Text="Password..." Foreground="Gray" FontSize="16"
-                               Margin="16,0" VerticalAlignment="Center" IsHitTestVisible="False"
-                               Visibility="Visible"/>
-                </Grid>
-
-                <Button Content="Verify" Style="{StaticResource ModernButton}" Margin="0,15,0,10"/>
-
-                <Grid Margin="0,10">
+                <Grid Margin="0,10,0,0" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <Button Content="←" FontSize="16" Background="Transparent" Foreground="#2ECC71" BorderThickness="0" Cursor="Hand"/>
-                    <Button Grid.Column="1" Content="Create account as teacher" Style="{StaticResource CreateAccountTeacher}" HorizontalAlignment="Center" Command="{Binding Command}" CommandParameter="{x:Type forms:TeacherRegistrationWindow}"/>
+                    
+                    <Button Content="←" FontSize="16" Background="Transparent" Foreground="#2ECC71" BorderThickness="0" Cursor="Hand" Margin="0,0,10,0"/>
+                    <Button Content="Register" Style="{StaticResource ModernButton}" Grid.Column="1" Margin="0"/>
                 </Grid>
             </StackPanel>
         </Border>
